@@ -7,17 +7,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".main.activities.NavigationActivity"
-    tools:showIn="@layout/app_bar_navigation">
+    tools:context=".main.activities.NavigationActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/last_updates"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_header_1"
         />
     <ListView
-        android:id = "@+id/lvNewChapter"
+        android:id = "@+id/list_NewChapter"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
     </ListView>
+
 </LinearLayout>

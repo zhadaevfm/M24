@@ -1,10 +1,8 @@
 package su.kuroikaze.m24.main.activities;
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,12 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import su.kuroikaze.m24.R;
 import su.kuroikaze.m24.new_chapters.NewChapterAdapter;
@@ -35,30 +32,23 @@ public class NavigationActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        showNewChapters();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        setContentLayout(R.layout.main_page);
+
+        showNewChapters();
     }
 
     private void showNewChapters() {
         ArrayList<NewChapter> newChapters = NewChaptersLoader.getNewChapters();
-        ListView listView = (ListView) findViewById(R.id.lvNewChapter);
+        ListView listView = (ListView) findViewById(R.id.list_NewChapter);
         ListAdapter adapter = new NewChapterAdapter(this, newChapters);
         listView.setAdapter(adapter);
 
@@ -114,5 +104,12 @@ public class NavigationActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setContentLayout(int layout_id){
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.rl_main);
+
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(this.LAYOUT_INFLATER_SERVICE);
+        relativeLayout.addView(layoutInflater.inflate(layout_id, null, false));
     }
 }
