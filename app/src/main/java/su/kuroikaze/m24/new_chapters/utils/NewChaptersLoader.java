@@ -1,5 +1,6 @@
 package su.kuroikaze.m24.new_chapters.utils;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.jsoup.nodes.Document;
@@ -27,15 +28,20 @@ public class NewChaptersLoader {
             Elements newChapters = content.getElementsByClass("new_chapter");
 
             for (Element newChapter : newChapters) {
-                String author = newChapter.getElementsByTag("address").first().text();
-                Element a = newChapter.getElementsByTag("a").first();
-                String href = a.attr("href");
-                String name = a.text();
-                result.add(new NewChapter(author, name, href));
+                result.add(parseChapterEntry(newChapter));
             }
         } catch (Exception e) {
             Log.e(NewChaptersLoader.class.toString(), "getNewChapters: ", e);
         }
         return result;
+    }
+
+    @NonNull
+    private static NewChapter parseChapterEntry(Element newChapter) {
+        String author = newChapter.getElementsByTag("address").first().text();
+        Element a = newChapter.getElementsByTag("a").first();
+        String href = a.attr("href");
+        String name = a.text();
+        return new NewChapter(author, name, href);
     }
 }

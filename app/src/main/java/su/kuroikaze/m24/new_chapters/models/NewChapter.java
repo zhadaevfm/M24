@@ -5,18 +5,18 @@ package su.kuroikaze.m24.new_chapters.models;
  */
 
 public class NewChapter {
-    String author;
+    String translator;
     String name;
     String href;
 
-    public NewChapter(String author, String name, String href) {
-        this.author = author;
+    public NewChapter(String translator, String name, String href) {
+        this.translator = translator;
         this.name = name;
         this.href = href;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getTranslator() {
+        return translator;
     }
 
     public String getName() {

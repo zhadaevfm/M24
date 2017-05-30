@@ -51,9 +51,9 @@ public class NewChapterAdapter extends BaseAdapter {
         }
         NewChapter chapter = chapters.get(position);
 
-        ((TextView) view.findViewById(R.id.tvAuthor)).setText(chapter.getAuthor());
-        ((TextView) view.findViewById(R.id.tvName)).setText(chapter.getName());
-        ((TextView) view.findViewById(R.id.tvLink)).setText(
+        ((TextView) view.findViewById(R.id.tv_ch_translator)).setText(chapter.getTranslator());
+        ((TextView) view.findViewById(R.id.tv_ch_name)).setText(chapter.getName());
+        ((TextView) view.findViewById(R.id.tv_ch_url)).setText(
                 ContentLoader.getFullUrl(chapter.getHref()));
 
         return view;

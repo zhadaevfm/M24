@@ -1,7 +1,7 @@
 package su.kuroikaze.m24.main.activities;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -24,6 +26,8 @@ import su.kuroikaze.m24.new_chapters.utils.NewChaptersLoader;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    final String LOG_TAG = getClass().getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,14 @@ public class NavigationActivity extends AppCompatActivity
         ListView listView = (ListView) findViewById(R.id.list_NewChapter);
         ListAdapter adapter = new NewChapterAdapter(this, newChapters);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(LOG_TAG, "onItemClick: position = "+position+", id = "+id);
+                //TODO: add some logic
+            }
+        });
 
     }
 
